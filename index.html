@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PastaNova | A Yummy Pasta</title>
+    <link rel="icon" href="src/logo.png?v=2" type="image/png">
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/home.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="spinner-ring"></div>
+            <img src="/src/logo.png" alt="Loading Pastanova" class="loader-logo">
+        </div>
+    </div>
+
+    <div id="navbar-placeholder"></div>
+    
+    <main>
+        <section id="beranda" class="hero-section">
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-2"></div> 
+            <div class="container hero-container">
+                <div class="hero-content reveal from-left">
+                    <div class="badge"><i class='bx bxs-medal'></i> Premium Quality</div>
+                    <img src="/src/icon.png" alt="PastaNova Brand Icon" class="main-brand-icon">
+                    <p class="tagline" style="color: var(--primary-pink); font-size: 1.6rem;">Grab Your Fork, Let's Eat!</p>
+                    
+                    <a href="#tentang" class="scroll-hint">
+                        <span>Scroll Down</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                </div>
+                
+                <div class="hero-image-wrapper reveal from-right delay-1">
+                    <div class="blob-bg"></div>
+                    <div class="hero-image floating">
+                        <img src="/src/makaroni.jpeg" alt="Lezatnya Makaroni Pastanova">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="about-section">
+            <div class="container about-container">
+                <div class="about-logo reveal from-left floating delay-1">
+                    <div class="logo-backdrop"></div>
+                    <img src="/src/logo.png" alt="Logo Pastanova">
+                </div>
+                
+                <div class="about-text reveal from-right">
+                    <h2>ABOUT US</h2>
+                    <div class="text-card">
+                        <p>
+                            Pastanova menyajikan pasta lezat yang dibuat dari bahan-bahan segar seperti tomat matang, daun basil, dan saus krim yang kaya rasa. Terinspirasi dari resep rumahan khas Italia, setiap hidangan dibuat dengan penuh cinta untuk menghadirkan kenyamanan di setiap suapan.
+                        </p>
+                        
+                        <div id="more-text" style="display: none;">
+                            <p>
+                                Kami memilih bahan berkualitas untuk memastikan cita rasa yang autentik, tekstur yang sempurna, dan pengalaman makan yang memuaskan. Tujuan kami adalah mengubah hidangan sederhana menjadi momen yang istimewa, baik saat anda menikmati makan siang yang hangat, makan malam bersama keluarga, maupun berbagi kebahagiaan dengan teman.
+                            </p>
+                            <p>
+                                Di Pastanova, setiap hidangan dibuat dengan hangat dan sepenuh hati, untuk menghadirkan cita rasa comfort food yang sesungguhnya.
+                            </p>
+                        </div>
+
+                        <button id="read-more-btn" class="btn-read-more">
+                            Baca Selengkapnya <i class='bx bx-chevron-down'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="comfort-section">
+            <div class="container comfort-container">
+                <div class="comfort-text reveal from-left">
+                    <h2 style="color: var(--bg-yellow);">A BOWL OF <br><span style="color: #fff;">COMFORT</span></h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="icon-box"><i class='bx bxs-heart'></i></div>
+                            <div class="feature-info">
+                                <h4>Handmade</h4>
+                                <p>Made by hand with love</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-box"><i class='bx bxs-star'></i></div>
+                            <div class="feature-info">
+                                <h4>Authentic</h4>
+                                <p>Rich flavor in every bite</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-box"><i class='bx bx-run'></i></div>
+                            <div class="feature-info">
+                                <h4>Fast Service</h4>
+                                <p>Same day pickup. Get it hot!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comfort-image-wrapper reveal from-right delay-1">
+                    <div class="frame-offset"></div>
+                    <div class="comfort-image">
+                        <img src="/src/spagheti.jpeg" alt="Spaghetti Carbonara">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <script src="/script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const readMoreBtn = document.getElementById('read-more-btn');
+            if(readMoreBtn) {
+                readMoreBtn.addEventListener('click', function() {
+                    const moreText = document.getElementById('more-text');
+                    if (moreText.style.display === 'none') {
+                        // Tampilkan teks
+                        moreText.style.display = 'block';
+                        this.innerHTML = "Tampilkan Lebih Sedikit <i class='bx bx-chevron-up'></i>";
+                    } else {
+                        // Sembunyikan teks
+                        moreText.style.display = 'none';
+                        this.innerHTML = "Baca Selengkapnya <i class='bx bx-chevron-down'></i>";
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

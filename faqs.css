@@ -1,0 +1,87 @@
+/* =========================================================
+   5. FAQS PAGE (faqs.css)
+   ========================================================= */
+
+/* --- FAQ Section Enhancements --- */
+.faq-section { 
+    background: linear-gradient(135deg, #FCFAFA 0%, #FFF4F7 100%); 
+    padding-top: 8rem; 
+    position: relative;
+}
+.faq-container { align-items: flex-start; }
+.faq-text-wrapper { flex: 1.2; z-index: 2; }
+.faq-text-wrapper h2 { 
+    font-size: 5rem; color: var(--primary-pink); line-height: 1; 
+    margin-bottom: 3rem; text-transform: uppercase; 
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 2rem; }
+
+/* Kotak FAQ Glassmorphism */
+.faq-item { 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(10px);
+    padding: 2rem; border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+    border-left: 6px solid var(--primary-pink); 
+    transition: all 0.4s ease; 
+    position: relative;
+}
+.faq-item:hover { 
+    transform: translateX(15px); 
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(200, 16, 78, 0.12);
+}
+.faq-item h4 { 
+    font-family: 'Anton', sans-serif; font-size: 1.5rem; 
+    color: var(--bg-dark-brown); margin-bottom: 0.5rem; letter-spacing: 1px; 
+    display: flex; align-items: center; gap: 8px;
+}
+.faq-item p { font-size: 1.05rem; font-weight: 600; color: #555; line-height: 1.5; }
+
+/* Frame Dekorasi untuk Gambar FAQ */
+.faq-image-wrapper { flex: 1; position: relative; max-width: 450px; z-index: 1; }
+.faq-image-wrapper::before { 
+    content: ''; position: absolute; top: 25px; right: -25px; width: 100%; height: 100%; 
+    border: 6px solid var(--bg-yellow); border-radius: 20px; z-index: 0; 
+}
+.faq-image-wrapper img { 
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 20px; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 8px solid #fff; position: relative; z-index: 1;
+}
+
+/* --- Let's Twirl Banner --- */
+.twirl-section { 
+    display: flex; width: 100%; min-height: 400px; 
+    background: linear-gradient(135deg, var(--primary-pink) 0%, #A00D3E 100%); 
+    overflow: hidden; margin-top: 6rem; padding: 0; align-items: center;
+}
+.twirl-text { flex: 1; padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; z-index: 2; }
+.twirl-text h2 { font-size: 5.5rem; color: var(--bg-yellow); line-height: 0.95; margin-bottom: 1.5rem; text-shadow: 3px 3px 0 rgba(0,0,0,0.15); }
+.twirl-text p { font-size: 1.2rem; color: #fff; font-weight: 600; margin-bottom: 2.5rem; max-width: 400px; opacity: 0.9; }
+.btn-twirl { 
+    background-color: var(--bg-yellow); color: var(--primary-pink); padding: 1rem 2.5rem; 
+    font-family: 'Anton', sans-serif; font-size: 1.5rem; letter-spacing: 1px; border-radius: 8px; 
+    text-decoration: none; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+}
+.btn-twirl:hover { background-color: var(--primary-orange); color: #fff; transform: translateY(-5px); box-shadow: 0 15px 25px rgba(0,0,0,0.2); }
+
+/* Lengkungan Elegan di Gambar Twirl */
+.twirl-image { flex: 1.2; position: relative; height: 100%; min-height: 400px; }
+.twirl-image img { 
+    width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; 
+    border-radius: 40px 0 0 40px; box-shadow: -15px 0 40px rgba(0,0,0,0.2);
+}
+
+/* --- Responsive FAQs --- */
+@media (max-width: 968px) {
+    .faq-container { flex-direction: column; text-align: left; }
+    .faq-text-wrapper h2 { font-size: 4rem; text-align: center; }
+    .faq-image-wrapper { margin: 0 auto; width: 80%; }
+    .faq-image-wrapper::before { top: 15px; right: -15px; }
+    .twirl-section { flex-direction: column; }
+    .twirl-text { padding: 4rem 2rem; align-items: center; text-align: center; }
+    .twirl-text h2 { font-size: 4rem; }
+    .twirl-image { min-height: 300px; width: 100%; }
+    .twirl-image img { border-radius: 0; } /* Reset lengkungan di mobile */
+}

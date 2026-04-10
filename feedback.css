@@ -1,0 +1,100 @@
+/* =========================================================
+   4. OUR FEEDBACK PAGE (feedback.css)
+   ========================================================= */
+
+/* --- Testimonial Section --- */
+.feedback-section { 
+    background: linear-gradient(135deg, #FCFAFA 0%, #FFF4F7 100%); 
+    padding-top: 8rem; 
+    position: relative;
+}
+.section-header { text-align: center; margin-bottom: 4rem; width: 100%; }
+.section-header h2 { font-size: 4.5rem; color: var(--primary-pink); line-height: 1.1; text-transform: uppercase; }
+
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; width: 100%; }
+.testimonial-card { 
+    background: #FFFFFF; padding: 2.5rem 2rem; border-radius: 20px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05); text-align: center; position: relative; 
+    transition: transform 0.4s ease, box-shadow 0.4s ease; 
+    border-bottom: 6px solid transparent; 
+}
+.testimonial-card:hover { 
+    transform: translateY(-10px); box-shadow: 0 20px 40px rgba(200, 16, 78, 0.15); 
+    border-bottom: 6px solid var(--primary-pink); /* Hover efek garis bawah */
+}
+.quote-icon { font-size: 3rem; color: var(--bg-yellow); margin-bottom: 1rem; opacity: 0.8; }
+.stars { color: var(--primary-pink); font-size: 1.5rem; margin-bottom: 1.5rem; letter-spacing: 5px; }
+.testimonial-card p { font-size: 1.1rem; font-weight: 700; color: var(--bg-dark-brown); margin-bottom: 2rem; line-height: 1.6; text-transform: uppercase; }
+.customer-name { font-family: 'Anton', sans-serif; font-size: 1.3rem; color: var(--primary-orange); letter-spacing: 1px; }
+
+/* --- Rating Section (Enhanced Glassmorphism) --- */
+.rating-section { 
+    background: linear-gradient(to bottom, var(--bg-yellow) 0%, #E8EB6A 100%); 
+    padding: 6rem 2rem; 
+}
+.rating-container { align-items: center; gap: 4rem; }
+.rating-image-wrapper { flex: 1; position: relative; max-width: 500px; z-index: 1; }
+.rating-image-wrapper img { 
+    width: 100%; border-radius: 20px; box-shadow: 0 25px 50px rgba(74, 43, 29, 0.2); 
+    border: 8px solid #fff; aspect-ratio: 4/3; object-fit: cover; position: relative; z-index: 1; 
+}
+/* Dekorasi di belakang gambar rating */
+.rating-image-wrapper::before { 
+    content: ''; position: absolute; top: 20px; left: -20px; width: 100%; height: 100%; 
+    border: 6px solid var(--primary-pink); border-radius: 20px; z-index: 0; 
+}
+
+.rating-text-wrapper { flex: 1; text-align: left; z-index: 2; }
+.rating-text-wrapper h2 { font-size: 5rem; color: var(--primary-pink); line-height: 1; margin-bottom: 2rem; text-transform: uppercase; }
+
+/* Glassmorphism Effect & Overlap */
+.rating-box { 
+    background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+    padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08); 
+    transform: translateX(-40px); /* Efek Overlap ke Kiri */
+}
+.rating-box .stars { font-size: 2rem; margin-bottom: 1rem; }
+.rating-box p { font-size: 1.15rem; font-weight: 700; color: var(--bg-dark-brown); line-height: 1.6; text-transform: uppercase; }
+
+/* --- Why Hits Different Section --- */
+.why-section { background-color: #FCFAFA; padding: 6rem 2rem; text-align: center; }
+.why-section .section-header h2 { font-size: 4rem; color: var(--primary-pink); text-transform: uppercase; margin-bottom: 3rem; }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; width: 100%; }
+.why-item { display: flex; flex-direction: column; align-items: center; }
+.why-img-wrapper { 
+    width: 100%; aspect-ratio: 16/10; overflow: hidden; border-radius: 16px; 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08); margin-bottom: 1.8rem; background-color: #fff; 
+}
+.why-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.why-item:hover .why-img-wrapper img { transform: scale(1.05); }
+.why-item h4 { font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--primary-orange); letter-spacing: 1px; }
+
+/* --- Pasta Choices Section --- */
+.choices-section { background-color: var(--bg-dark-brown); padding: 6rem 2rem; }
+.choices-header { text-align: center; margin-bottom: 4rem; }
+.choices-header h2 { font-size: 4.5rem; color: var(--bg-yellow); text-transform: uppercase; }
+.choices-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; width: 100%; }
+.choice-card { text-align: center; }
+.choice-card h3 { font-family: 'Anton', sans-serif; font-size: 2.2rem; color: var(--primary-orange); margin-bottom: 1.5rem; letter-spacing: 1px; }
+.choice-img-wrapper { 
+    width: 100%; aspect-ratio: 4/3; overflow: hidden; border: 4px solid var(--primary-pink); 
+    border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: 0.4s ease;
+}
+.choice-card:hover .choice-img-wrapper { border-color: var(--bg-yellow); transform: translateY(-10px); }
+.choice-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.choice-card p { font-size: 1.15rem; font-weight: 600; line-height: 1.6; text-align: justify; color: #E8E8E8; }
+
+/* Responsive Feedback */
+@media (max-width: 850px) {
+    .section-header h2 { font-size: 3.5rem; }
+    .rating-container { flex-direction: column; text-align: center; }
+    .rating-text-wrapper { text-align: center; }
+    .rating-text-wrapper h2 { font-size: 4rem; }
+    .rating-box { transform: translateX(0); margin-top: -2rem; } /* Reset Overlap di Mobile */
+    .rating-image-wrapper { width: 90%; margin: 0 auto; }
+    .rating-image-wrapper::before { top: 15px; left: 15px; }
+    .why-section .section-header h2 { font-size: 3rem; }
+    .choices-header h2 { font-size: 3.5rem; }
+    .choice-card h3 { font-size: 1.8rem; }
+}
