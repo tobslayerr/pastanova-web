@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | PastaNova</title>
+    <link rel="icon" href="../src/logo.png?v=2" type="image/png">
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/contact.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="spinner-ring"></div>
+            <img src="/src/logo.png" alt="Loading Pastanova" class="loader-logo">
+        </div>
+    </div>
+
+    <div id="navbar-placeholder"></div>
+
+    <main>
+        <section class="contact-section">
+            <div class="container contact-container">
+                
+                <div class="contact-header reveal from-left">
+                    <h2>CONTACT US</h2>
+                </div>
+                
+                <div class="contact-form-wrapper reveal from-right delay-1">
+                    
+                    <form class="contact-form" action="#" onsubmit="sendToWhatsApp(event)">
+                        
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Leave a message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <script src="/script.js"></script>
+
+    <script>
+        function sendToWhatsApp(event) {
+            // Mencegah halaman me-reload saat tombol submit diklik
+            event.preventDefault(); 
+
+            // Mengambil nilai (value) dari input form
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Format teks pesan (%0A adalah kode untuk Enter/Garis Baru di URL)
+            const textMessage = `Halo PastaNova!%0A%0A*Nama:* ${name}%0A*Email:* ${email}%0A*Pesan:* ${message}`;
+
+            // Link API WhatsApp
+            const waURL = `https://wa.me/6281287990438?text=${textMessage}`;
+
+            // Membuka WhatsApp di tab baru
+            window.open(waURL, '_blank');
+        }
+    </script>
+</body>
+</html>
