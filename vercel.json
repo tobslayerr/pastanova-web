@@ -7,43 +7,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "admin/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "menu/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "about-us/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "contact-us/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "faqs/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "our-feedback/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "src/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
+      "src": "**/*.*",
       "use": "@vercel/static"
     }
   ],
@@ -59,5 +23,7 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": true
 }
