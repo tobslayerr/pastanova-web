@@ -1,0 +1,161 @@
+/* =========================================================
+   FULL MENU & DETAIL PAGE STYLES (menu.css)
+   ========================================================= */
+
+/* --- 1. GLOBAL MENU PAGE --- */
+.menu-section { background: linear-gradient(135deg, #FCFAFA 0%, #FFF4F7 100%); padding-top: 8rem; padding-bottom: 6rem; }
+.menu-header h2 { font-size: 5rem; color: var(--primary-pink); line-height: 1; text-transform: uppercase; font-family: 'Anton', sans-serif;}
+.menu-subtitle { color: #888; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; }
+
+/* Filter & Pencarian */
+.menu-controls { display: flex; flex-direction: column; align-items: center; gap: 2rem; width: 100%; max-width: 850px; margin: 3rem auto 0; }
+.search-wrapper { position: relative; width: 100%; }
+.search-wrapper i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--primary-pink); }
+.search-wrapper input { width: 100%; padding: 1.2rem 1.2rem 1.2rem 3.5rem; border: none; border-radius: 50px; background: #FFF; box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 700; transition: 0.3s; }
+.search-wrapper input:focus { outline: none; box-shadow: 0 15px 40px rgba(200, 16, 78, 0.12); transform: translateY(-3px); }
+
+.filter-box { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { padding: 10px 22px; border: 2px solid var(--primary-pink); border-radius: 30px; background: transparent; color: var(--primary-pink); cursor: pointer; transition: 0.3s; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; }
+.filter-btn.active, .filter-btn:hover { background: var(--primary-pink); color: #fff; transform: translateY(-3px); }
+
+/* --- 2. KARTU MENU (CARD) --- */
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 3rem; margin-top: 5rem; }
+.menu-card { background: #FFF; border-radius: 30px; padding: 1.2rem; display: flex; flex-direction: column; position: relative; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 15px 40px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); height: 100%; }
+.menu-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(200, 16, 78, 0.15); }
+
+.menu-img-container { width: 100%; height: 240px; border-radius: 20px; overflow: hidden; position: relative; margin-bottom: 1.5rem; flex-shrink: 0; background: #FAFAFA;}
+.menu-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
+.menu-card:hover .menu-img-container img { transform: scale(1.1); }
+.menu-tag { position: absolute; top: 15px; left: 15px; background: var(--bg-yellow); color: var(--primary-pink); padding: 5px 15px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; z-index: 2; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+.menu-content { display: flex; flex-direction: column; flex-grow: 1; }
+.menu-content h3 { font-family: 'Anton', sans-serif; font-size: 1.8rem; color: var(--bg-dark-brown); margin-bottom: 8px; letter-spacing: 0.5px; }
+.menu-content p { color: #777; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.menu-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1.2rem; border-top: 1px solid #F0F0F0; }
+.price-tag { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--primary-pink); }
+.btn-go-detail { background: var(--bg-dark-brown); color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 15px; text-decoration: none; font-size: 1.5rem; transition: 0.3s; }
+.btn-go-detail:hover { background: var(--primary-orange); transform: rotate(-10deg); }
+
+.pagination-controls { display: flex; justify-content: center; gap: 10px; margin-top: 5rem; }
+.page-btn { width: 45px; height: 45px; border: 2px solid #EEE; background: #fff; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+.page-btn.active { background: var(--primary-pink); color: #fff; border-color: var(--primary-pink); }
+
+/* =========================================================
+   3. DETAIL PAGE (PREMIUM E-COMMERCE LAYOUT)
+   ========================================================= */
+.detail-page-wrapper { background: #FCFAFA; padding-top: 6rem; padding-bottom: 6rem; min-height: 80vh; margin-left: var(--sidebar-width); transition: 0.4s ease; }
+.detail-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+.detail-nav-top { margin-bottom: 2rem; }
+.btn-back-link { display: inline-flex; align-items: center; gap: 5px; color: #888; font-weight: 800; font-size: 1.1rem; text-decoration: none; transition: 0.3s; background: #fff; padding: 10px 20px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+.btn-back-link:hover { transform: translateX(-5px); color: var(--primary-pink); box-shadow: 0 8px 20px rgba(200, 16, 78, 0.1); }
+
+.detail-grid-premium { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: stretch; background: #fff; padding: 3rem; border-radius: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.04); }
+
+/* --- Galeri Uncropped (Contain) --- */
+.detail-gallery-showcase { display: flex; flex-direction: column; gap: 1rem; position: relative; }
+.detail-carousel { 
+    width: 100%; height: 500px; border-radius: 25px; overflow: hidden; position: relative; 
+    background: #F8F9FA; /* Background abu-abu lembut agar gambar menonjol */
+    border: 2px solid #F0F0F0;
+}
+.carousel-inner { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.carousel-inner::-webkit-scrollbar { display: none; }
+.carousel-inner img { 
+    width: 100%; height: 100%; flex-shrink: 0; 
+    object-fit: contain; /* KUNCI AGAR FOTO TIDAK TERPOTONG */
+    scroll-snap-align: center; padding: 15px; /* Memberi ruang napas pada gambar */
+}
+
+.c-prev, .c-next { position: absolute; top: 50%; transform: translateY(-50%); background: #FFF; border: none; width: 45px; height: 45px; border-radius: 50%; color: var(--primary-pink); z-index: 2; cursor: pointer; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+.c-prev { left: 15px; } .c-next { right: 15px; }
+.c-prev:hover, .c-next:hover { background: var(--primary-pink); color: #fff; transform: translateY(-50%) scale(1.1); }
+.gallery-hint { text-align: center; font-size: 0.9rem; font-weight: 700; color: #AAA; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+/* --- Info Produk --- */
+.detail-info-showcase { display: flex; flex-direction: column; justify-content: center; }
+.detail-badge { display: inline-block; background: var(--bg-yellow); color: var(--primary-pink); padding: 8px 20px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1.5rem; }
+.info-header h1 { font-family: 'Anton', sans-serif; font-size: 3.5rem; color: var(--bg-dark-brown); line-height: 1.1; margin-bottom: 0.5rem; }
+.detail-price-big { font-family: 'Anton', sans-serif; font-size: 2.5rem; color: var(--primary-orange); }
+
+.detail-divider { width: 100%; height: 2px; background: #F0F0F0; margin: 2rem 0; border-radius: 5px; }
+
+.detail-description-box h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px; color: var(--primary-pink); display: flex; align-items: center; gap: 8px;}
+.detail-description-box p { color: #555; line-height: 1.8; font-size: 1.05rem; font-weight: 600; text-align: justify; }
+
+/* --- Area Aksi (Add to Cart) --- */
+.detail-action-area { display: flex; flex-direction: column; gap: 1.5rem; background: #FCFAFA; padding: 2rem; border-radius: 25px; border: 1px solid #F0F0F0; }
+.action-row { display: flex; align-items: center; justify-content: space-between; }
+.action-label { font-weight: 800; font-size: 1.1rem; color: #555; }
+.qty-control-box { display: inline-flex; align-items: center; justify-content: space-between; width: 150px; background: #FFF; border: 2px solid #EAEAEA; padding: 10px 15px; border-radius: 15px; }
+.qty-control-box button { background: none; border: none; font-size: 1.4rem; color: var(--primary-pink); cursor: pointer; font-weight: bold; }
+.qty-control-box span { font-size: 1.3rem; font-weight: 800; color: var(--bg-dark-brown); }
+
+.action-buttons-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.btn-add-to-cart { background: #FFF; color: var(--primary-pink); border: 2px solid var(--primary-pink); padding: 15px; border-radius: 15px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-add-to-cart:hover { background: rgba(200, 16, 78, 0.05); transform: translateY(-3px); }
+.btn-buy-now { background: var(--primary-pink); color: #FFF; border: none; padding: 15px; border-radius: 15px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(200, 16, 78, 0.3); }
+.btn-buy-now:hover { background: var(--bg-dark-brown); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(74, 43, 29, 0.2); }
+
+/* =========================================================
+   4. SISTEM KERANJANG (SIDEBAR & FLOATING BTN)
+   ========================================================= */
+.floating-cart-btn { position: fixed; bottom: 40px; right: 40px; background: var(--primary-pink); color: #fff; width: 70px; height: 70px; border-radius: 50%; border: none; font-size: 2.2rem; box-shadow: 0 15px 35px rgba(200, 16, 78, 0.4); cursor: pointer; z-index: 900; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
+.floating-cart-btn:hover { transform: scale(1.1) rotate(-5deg); }
+.cart-badge { position: absolute; top: -5px; right: -5px; background: var(--bg-yellow); color: var(--primary-pink); width: 28px; height: 28px; border-radius: 50%; font-size: 1rem; font-weight: 800; display: flex; justify-content: center; align-items: center; border: 3px solid #fff; }
+
+.cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; visibility: hidden; transition: 0.4s; backdrop-filter: blur(4px); }
+.cart-overlay.active { opacity: 1; visibility: visible; }
+.cart-sidebar { position: absolute; right: -500px; top: 0; width: 100%; max-width: 450px; height: 100%; background: #fff; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; flex-direction: column; box-shadow: -10px 0 50px rgba(0,0,0,0.1); }
+.cart-overlay.active .cart-sidebar { right: 0; }
+
+.cart-header { padding: 30px; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: center; background: #FCFAFA; }
+.cart-header h3 { font-family: 'Anton', sans-serif; font-size: 2rem; color: var(--primary-pink); letter-spacing: 1px; }
+.btn-close-cart { background: #FFE5E5; color: #FF4757; border: none; width: 40px; height: 40px; border-radius: 12px; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
+.btn-close-cart:hover { background: #FF4757; color: #FFF; transform: rotate(90deg); }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+.cart-items::-webkit-scrollbar { width: 6px; }
+.cart-items::-webkit-scrollbar-thumb { background: #DDD; border-radius: 10px; }
+.cart-item { display: flex; gap: 15px; align-items: center; border-bottom: 1px solid #F5F5F5; padding-bottom: 20px; }
+.cart-item img { width: 85px; height: 85px; border-radius: 18px; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.cart-item-info { flex: 1; }
+.cart-item-info h4 { font-size: 1.1rem; color: var(--bg-dark-brown); margin-bottom: 5px; font-weight: 800; }
+.cart-item-price { color: var(--primary-pink); font-weight: 800; font-size: 1.1rem; }
+.cart-qty-ctrl { display: flex; align-items: center; gap: 12px; margin-top: 10px; background: #F8F9FA; width: fit-content; padding: 6px 12px; border-radius: 12px; font-weight: 800; border: 1px solid #EEE; }
+.cart-qty-ctrl button { background: none; border: none; color: var(--primary-pink); font-size: 1.2rem; cursor: pointer; }
+
+.cart-footer { padding: 30px; border-top: 2px solid #F0F0F0; background: #fff; }
+.cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 800; font-size: 1.2rem; color: #888; }
+.cart-total-row h3 { font-family: 'Anton', sans-serif; font-size: 2.2rem; color: var(--primary-orange); }
+.btn-checkout-wa { width: 100%; background: #25D366; color: #fff; border: none; padding: 18px; border-radius: 18px; font-weight: 800; font-size: 1.2rem; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); }
+.btn-checkout-wa:hover { background: #128C7E; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4); }
+
+
+/* =========================================================
+   RESPONSIVE MOBILE (HP & TABLET)
+   ========================================================= */
+@media (max-width: 1024px) {
+    .detail-grid-premium { grid-template-columns: 1fr; padding: 2rem; gap: 3rem; }
+    .detail-page-wrapper { margin-left: 0; padding-top: 7rem; padding-bottom: 4rem; }
+    .detail-carousel { height: 400px; }
+}
+
+@media (max-width: 768px) {
+    .menu-section { padding-top: 6rem; padding-bottom: 4rem; }
+    .menu-header h2 { font-size: 3.2rem; padding: 0 1rem; }
+    .menu-grid { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.5rem; margin-top: 3rem; }
+    
+    .detail-page-wrapper { padding-top: 5rem; }
+    .detail-container { padding: 0 1rem; }
+    .detail-grid-premium { padding: 1.5rem; border-radius: 25px; }
+    .detail-carousel { height: 300px; border-radius: 15px; }
+    .info-header h1 { font-size: 2.5rem; }
+    .detail-price-big { font-size: 2rem; }
+    .action-buttons-group { grid-template-columns: 1fr; }
+    
+    .cart-sidebar { max-width: 100%; right: -100%; }
+    .floating-cart-btn { width: 60px; height: 60px; font-size: 1.8rem; bottom: 20px; right: 20px; }
+    .cart-badge { width: 24px; height: 24px; font-size: 0.85rem; top: -2px; right: -2px;}
+}

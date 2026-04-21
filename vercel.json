@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "name": "pastanova-fullstack",
+  "builds": [
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "admin/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "menu/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "about-us/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "contact-us/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "faqs/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "our-feedback/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/server.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

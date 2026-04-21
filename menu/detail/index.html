@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | PastaNova</title>
+    <link rel="icon" href="/src/logo.png?v=2" type="image/png">
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/menu.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="detail-page-wrapper">
+        <div class="container detail-container">
+            
+            <div class="detail-nav-top">
+                <a href="/menu/" class="btn-back-link"><i class='bx bx-left-arrow-alt'></i> Kembali ke Menu</a>
+            </div>
+            
+            <div class="detail-grid-premium">
+                <div class="detail-gallery-showcase">
+                    <div class="detail-carousel" id="productCarousel">
+                        <div class="carousel-inner" id="detailImagesInner">
+                            </div>
+                        <button class="c-prev" onclick="moveSlideDetail(-1)"><i class='bx bx-chevron-left'></i></button>
+                        <button class="c-next" onclick="moveSlideDetail(1)"><i class='bx bx-chevron-right'></i></button>
+                    </div>
+                    <div class="gallery-hint">
+                        <i class='bx bx-swipe'></i> Geser untuk melihat foto lainnya
+                    </div>
+                </div>
+
+                <div class="detail-info-showcase">
+                    <div class="info-header">
+                        <span id="detailCategory" class="detail-badge">CATEGORY</span>
+                        <h1 id="detailName">LOADING...</h1>
+                        <div id="detailPrice" class="detail-price-big">Rp 0</div>
+                    </div>
+                    
+                    <div class="detail-divider"></div>
+                    
+                    <div class="detail-description-box">
+                        <h3><i class='bx bx-restaurant'></i> Deskripsi Menu</h3>
+                        <p id="detailDesc">Mohon tunggu sebentar, sedang mengambil data produk...</p>
+                    </div>
+
+                    <div class="detail-divider"></div>
+
+                    <div class="detail-action-area">
+                        <div class="action-row">
+                            <span class="action-label">Jumlah:</span>
+                            <div class="qty-control-box">
+                                <button onclick="changeDetailQty(-1)"><i class='bx bx-minus'></i></button>
+                                <span id="detailQtyVal">1</span>
+                                <button onclick="changeDetailQty(1)"><i class='bx bx-plus'></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons-group">
+                            <button class="btn-add-to-cart" onclick="handleAddToCart()">
+                                <i class='bx bx-cart-add'></i> Masukkan Keranjang
+                            </button>
+                            <button class="btn-buy-now" onclick="handleBuyNow()">
+                                Pesan Langsung
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="floating-cart-btn" onclick="toggleCart()">
+            <i class='bx bx-shopping-bag'></i>
+            <span class="cart-badge">0</span>
+        </button>
+
+        <div id="cartModal" class="cart-overlay">
+            <div class="cart-sidebar">
+                <div class="cart-header">
+                    <h3>Keranjang Pesanan</h3>
+                    <button class="btn-close-cart" onclick="toggleCart()">&times;</button>
+                </div>
+                <div class="cart-items" id="cartItemsList"></div>
+                <div class="cart-footer">
+                    <div class="cart-total-row">
+                        <span>Total Pembayaran</span>
+                        <h3 id="cartTotalPrice">Rp 0</h3>
+                    </div>
+                    <button class="btn-checkout-wa" onclick="checkoutCartWA()">
+                        <i class='bx bxl-whatsapp'></i> Checkout via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/script.js"></script>
+    <script src="/menu.js"></script>
+    
+    <script>
+        // Logika Eksekusi Halaman Detail
+        let detailQty = 1;
+        let detailItem = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const id = new URLSearchParams(window.location.search).get('id');
+            if(!id) return window.location.href = '/menu/';
+
+            try {
+                // Pastikan backend kamu menyala (npm run dev)
+                const res = await fetch(`http://localhost:5000/api/menus`);
+                const data = await res.json();
+                detailItem = data.menus.find(m => m._id === id);
+
+                if(detailItem) {
+                    document.getElementById('detailName').innerText = detailItem.name;
+                    document.getElementById('detailPrice').innerText = `Rp ${detailItem.price.toLocaleString('id-ID')}`;
+                    document.getElementById('detailDesc').innerText = detailItem.description;
+                    document.getElementById('detailCategory').innerText = detailItem.category;
+                    
+                    // Inject gambar ke carousel
+                    document.getElementById('detailImagesInner').innerHTML = detailItem.images.map(img => `<img src="${img}" alt="${detailItem.name}">`).join('');
+                }
+            } catch(e) { console.error("Gagal mengambil data produk", e); }
+        });
+
+        function moveSlideDetail(dir) {
+            const track = document.getElementById('detailImagesInner');
+            track.scrollBy({ left: track.clientWidth * dir, behavior: 'smooth' });
+        }
+
+        function changeDetailQty(delta) {
+            detailQty += delta;
+            if(detailQty < 1) detailQty = 1;
+            document.getElementById('detailQtyVal').innerText = detailQty;
+        }
+
+        function handleAddToCart() {
+            if(!detailItem) return;
+            addToCart(detailItem._id, detailItem.name, detailItem.price, detailItem.images[0], detailQty);
+            detailQty = 1; // Reset ke 1
+            document.getElementById('detailQtyVal').innerText = detailQty;
+            toggleCart(); // Tampilkan keranjang dari samping
+        }
+
+        function handleBuyNow() {
+            if(!detailItem) return;
+            const total = detailItem.price * detailQty;
+            
+            let text = `Halo *PastaNova!*`;
+            text += `Saya ingin memesan menu berikut:`;
+            text += `*Pesanan Langsung:`;
+            text += `${detailQty}x *${detailItem.name}`;
+            text += `   ↳ Rp ${total.toLocaleString('id-ID')}`;
+            text += `━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+            text += `*Total Pembayaran:* *Rp ${total.toLocaleString('id-ID')}`;
+            text += `Mohon informasi ketersediaannya ya. Terima kasih!`;
+            
+            window.open(`https://wa.me/6281287990438?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>

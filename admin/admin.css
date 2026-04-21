@@ -1,0 +1,74 @@
+.admin-main { background: #F4F4F4; padding: 6rem 2rem; margin-left: var(--sidebar-width); min-height: 100vh; }
+.admin-container { max-width: 1100px; margin: 0 auto; }
+
+.admin-header h2 { font-size: 4.5rem; color: var(--primary-pink); text-shadow: 2px 2px 0 rgba(0,0,0,0.02); font-family: 'Anton', sans-serif; line-height: 1; }
+.admin-header p { font-weight: 700; color: #888; margin-top: 10px; }
+
+.admin-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem; margin-top: 3rem; }
+
+.admin-card { background: #fff; padding: 2.5rem; border-radius: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.05); }
+.admin-card h3 { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--bg-dark-brown); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+
+/* Kategori List */
+.mini-form { display: flex; gap: 10px; margin-bottom: 2rem; }
+.mini-form input { flex: 1; padding: 12px; border: 2px solid #F0F0F0; border-radius: 12px; font-weight: 600; }
+.btn-icon { background: var(--primary-pink); color: #fff; border: none; padding: 0 15px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+.admin-list { list-style: none; }
+.admin-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F5F5F5; font-weight: 700; color: #444; }
+.admin-list button { background: #FFE5E5; color: #FF4757; border: none; padding: 5px 8px; border-radius: 8px; cursor: pointer; }
+
+/* Menu Form */
+#menuForm { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-weight: 800; font-size: 0.9rem; color: #555; }
+.form-group input, .form-group textarea, .form-group select { 
+    padding: 12px; border: 2px solid #F5F5F5; border-radius: 12px; background: #FAFAFA; font-family: 'Nunito', sans-serif; font-weight: 600;
+}
+.form-group input:focus { border-color: var(--primary-pink); outline: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* File Upload & Preview Drag Drop */
+.file-upload-box { 
+    border: 2px dashed #DDD; padding: 25px; text-align: center; border-radius: 15px; 
+    cursor: pointer; color: #888; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: #FAFAFA;
+}
+.file-upload-box:hover { border-color: var(--primary-pink); background: rgba(200, 16, 78, 0.03); }
+.file-upload-box input { display: none; }
+
+.preview-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.preview-item { 
+    width: 80px; height: 80px; border-radius: 10px; overflow: hidden; position: relative; 
+    cursor: grab; border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.preview-item:active { cursor: grabbing; }
+.preview-item.dragging { opacity: 0.5; }
+.preview-item.drag-over { border-color: var(--primary-orange); transform: scale(1.05); }
+.preview-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.btn-remove-preview { 
+    position: absolute; top: 3px; right: 3px; background: rgba(255, 71, 87, 0.9); 
+    color: white; border: none; border-radius: 50%; width: 22px; height: 22px; 
+    font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+/* Tombol Submit */
+.full-btn { 
+    background: var(--primary-pink); color: #fff; border: none; 
+    padding: 1.2rem; border-radius: 15px; font-weight: 800; font-size: 1.1rem; 
+    cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(200, 16, 78, 0.2);
+    display: flex; justify-content: center; align-items: center; gap: 8px;
+}
+.full-btn:hover:not(:disabled) { background: var(--bg-dark-brown); transform: translateY(-3px); }
+.full-btn:disabled { background: #CCC; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* Table */
+.admin-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.admin-table th { background: #FFF4F7; color: var(--primary-pink); font-size: 1rem; text-transform: uppercase; padding: 15px; text-align: left;}
+.admin-table td { font-size: 1rem; color: #444; border-bottom: 1px solid #F0F0F0; padding: 15px;}
+.btn-delete { background: #FF4757; color: #fff; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: 800; transition: 0.3s; }
+.btn-delete:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3); }
+
+@media (max-width: 968px) {
+    .admin-main { margin-left: 0; padding-top: 7rem; }
+    .admin-grid { grid-template-columns: 1fr; }
+}

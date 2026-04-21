@@ -9,28 +9,23 @@ window.addEventListener('load', () => {
 
 /* --- Logika Utama Website & Component Loader --- */
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Memuat Navbar dan Footer secara paralel menggunakan Fetch API
     Promise.all([
         fetch('/navbar.html').then(res => res.text()),
         fetch('/footer.html').then(res => res.text())
     ]).then(([navbarData, footerData]) => {
         
-        // Memasukkan HTML ke dalam Placeholder
-        document.getElementById('navbar-placeholder').innerHTML = navbarData;
-        document.getElementById('footer-placeholder').innerHTML = footerData;
+        // Pengecekan Aman (Menghindari Error NULL)
+        const navHolder = document.getElementById('navbar-placeholder');
+        const footHolder = document.getElementById('footer-placeholder');
+        
+        if (navHolder) navHolder.innerHTML = navbarData;
+        if (footHolder) footHolder.innerHTML = footerData;
 
-        // Setelah komponen HTML dimuat, inisialisasi semua logika website
         initWebsiteLogic();
-
     }).catch(err => console.error("Gagal memuat komponen:", err));
-
 });
 
-// Fungsi untuk menjalankan logika setelah komponen selesai dimuat
 function initWebsiteLogic() {
-    
-    /* --- 1. Logika Mobile Sidebar Toggle & Overlay --- */
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
@@ -53,14 +48,8 @@ function initWebsiteLogic() {
         });
     });
 
-    /* --- 2. Navigasi Cerdas Multi-page & Tweak Halaman Spesifik --- */
     const pathname = window.location.pathname;
-    const isAboutUs = pathname.includes('/about-us');
-    const isOurFeedback = pathname.includes('/our-feedback');
-    const isFaqs = pathname.includes('/faqs');
-    const isContactUs = pathname.includes('/contact-us');
     const isHome = pathname === '/' || pathname === '/index.html';
-
     const sections = document.querySelectorAll('main > section[id]');
     
     const updateActiveAnchor = (targetId) => {
@@ -76,13 +65,12 @@ function initWebsiteLogic() {
     const currentHash = window.location.hash;
     
     // Setel menu aktif default
-    if (isAboutUs) navLinks.forEach(link => { if (link.getAttribute('href') === '/about-us/') link.classList.add('active'); });
-    else if (isOurFeedback) navLinks.forEach(link => { if (link.getAttribute('href') === '/our-feedback/') link.classList.add('active'); });
-    else if (isFaqs) navLinks.forEach(link => { if (link.getAttribute('href') === '/faqs/') link.classList.add('active'); });
-    else if (isContactUs) navLinks.forEach(link => { if (link.getAttribute('href') === '/contact-us/') link.classList.add('active'); });
+    if (pathname.includes('/about-us')) navLinks.forEach(link => { if (link.getAttribute('href') === '/about-us/') link.classList.add('active'); });
+    else if (pathname.includes('/our-feedback')) navLinks.forEach(link => { if (link.getAttribute('href') === '/our-feedback/') link.classList.add('active'); });
+    else if (pathname.includes('/faqs')) navLinks.forEach(link => { if (link.getAttribute('href') === '/faqs/') link.classList.add('active'); });
+    else if (pathname.includes('/contact-us')) navLinks.forEach(link => { if (link.getAttribute('href') === '/contact-us/') link.classList.add('active'); });
     else if (isHome && !currentHash) navLinks.forEach(link => { if (link.getAttribute('href') === '/') link.classList.add('active'); });
 
-    // Scroll Observer untuk Home
     if (isHome && sections.length > 0) {
         if (currentHash) setTimeout(() => { updateActiveAnchor(currentHash.substring(1)); }, 300);
         const scrollObserver = new IntersectionObserver((entries) => {
@@ -91,7 +79,6 @@ function initWebsiteLogic() {
         sections.forEach(section => scrollObserver.observe(section));
     }
 
-    /* --- 3. Anti-Reload Smooth Scroll --- */
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             if (this.getAttribute('href') === '/' && isHome) {
@@ -100,16 +87,6 @@ function initWebsiteLogic() {
         });
     });
 
-    const logoLink = document.querySelector('a.logo');
-    if (logoLink) {
-        logoLink.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '/' && isHome) {
-                e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-    }
-
-    /* --- 4. Scroll Reveal Animation (Di-load ulang untuk Footer juga) --- */
     const reveals = document.querySelectorAll('.reveal');
     if (reveals.length > 0) {
         const revealObserver = new IntersectionObserver((entries) => {
