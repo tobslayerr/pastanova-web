@@ -118,7 +118,7 @@
 
             try {
                 // Pastikan backend kamu menyala (npm run dev)
-                const res = await fetch(`http://localhost:5000/api/menus`);
+                const res = await fetch(`/api/menus`);
                 const data = await res.json();
                 detailItem = data.menus.find(m => m._id === id);
 
