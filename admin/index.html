@@ -22,7 +22,7 @@
                     <h2>ADMIN <span class="text-orange">CENTER</span></h2>
                     <p>Welcome back, Manage your delicious menu here.</p>
                 </div>
-                <button onclick="logoutAdmin()" style="background:#FFE5E5; color:#FF4757; border:none; padding:12px 25px; border-radius:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px;">
+                <button onclick="logoutAdmin()" class="btn-logout">
                     <i class='bx bx-log-out' style="font-size: 1.2rem;"></i> LOGOUT
                 </button>
             </div>
@@ -42,6 +42,7 @@
                         <h3><i class='bx bx-plus-medical'></i> MANAGE ADD-ONS</h3>
                         <form id="addonForm" class="mini-form-column">
                             <input type="text" id="addonName" placeholder="Addon Name (e.g. Extra Cheese)" required>
+                            <input type="text" id="addonDesc" placeholder="Description (e.g. Keju lumer lezat)" required>
                             <input type="number" id="addonPrice" placeholder="Price (0 if free)" required>
                             <input type="file" id="addonImage" accept="image/*" required style="padding: 8px;">
                             <button type="submit" class="btn-save-addon" id="saveAddonBtn">Save Add-on</button>
@@ -51,7 +52,7 @@
                 </div>
 
                 <div class="admin-card reveal from-right">
-                    <h3><i class='bx bx-plus-circle'></i> ADD NEW PRODUCT</h3>
+                    <h3 id="formTitle"><i class='bx bx-plus-circle'></i> ADD NEW PRODUCT</h3>
                     <form id="menuForm">
                         <div class="form-group">
                             <label>Product Name</label>
@@ -74,8 +75,7 @@
                         
                         <div class="form-group">
                             <label>Available Add-ons (Optional)</label>
-                            <div id="addonSelectionGrid" class="addon-selection-grid">
-                                </div>
+                            <div id="addonSelectionGrid" class="addon-selection-grid"></div>
                         </div>
                         
                         <div class="form-group">
@@ -88,9 +88,14 @@
                             <div id="imagePreviewContainer" class="preview-grid"></div>
                         </div>
 
-                        <button type="submit" id="submitMenuBtn" class="full-btn">
-                            <i class='bx bx-save'></i> SAVE TO DATABASE
-                        </button>
+                        <div style="display:flex; gap:10px; margin-top: 10px;">
+                            <button type="submit" id="submitMenuBtn" class="full-btn" style="flex:1;">
+                                <i class='bx bx-save'></i> SAVE TO DATABASE
+                            </button>
+                            <button type="button" id="cancelEditBtn" class="full-btn btn-cancel" style="display:none; flex:0.3;" onclick="cancelEdit()">
+                                CANCEL
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
