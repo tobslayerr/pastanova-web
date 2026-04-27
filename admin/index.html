@@ -28,13 +28,26 @@
             </div>
 
             <div class="admin-grid">
-                <div class="admin-card reveal from-left">
-                    <h3><i class='bx bx-category'></i> CATEGORIES</h3>
-                    <form id="catForm" class="mini-form">
-                        <input type="text" id="catName" placeholder="New category name..." required>
-                        <button type="submit" class="btn-icon"><i class='bx bx-plus'></i></button>
-                    </form>
-                    <ul id="catList" class="admin-list"></ul>
+                <div class="left-column">
+                    <div class="admin-card reveal from-left">
+                        <h3><i class='bx bx-category'></i> CATEGORIES</h3>
+                        <form id="catForm" class="mini-form">
+                            <input type="text" id="catName" placeholder="New category name..." required>
+                            <button type="submit" class="btn-icon"><i class='bx bx-plus'></i></button>
+                        </form>
+                        <ul id="catList" class="admin-list"></ul>
+                    </div>
+
+                    <div class="admin-card reveal from-left delay-1 mt-3">
+                        <h3><i class='bx bx-plus-medical'></i> MANAGE ADD-ONS</h3>
+                        <form id="addonForm" class="mini-form-column">
+                            <input type="text" id="addonName" placeholder="Addon Name (e.g. Extra Cheese)" required>
+                            <input type="number" id="addonPrice" placeholder="Price (0 if free)" required>
+                            <input type="file" id="addonImage" accept="image/*" required style="padding: 8px;">
+                            <button type="submit" class="btn-save-addon" id="saveAddonBtn">Save Add-on</button>
+                        </form>
+                        <ul id="addonList" class="admin-list mt-2"></ul>
+                    </div>
                 </div>
 
                 <div class="admin-card reveal from-right">
@@ -60,6 +73,12 @@
                         </div>
                         
                         <div class="form-group">
+                            <label>Available Add-ons (Optional)</label>
+                            <div id="addonSelectionGrid" class="addon-selection-grid">
+                                </div>
+                        </div>
+                        
+                        <div class="form-group">
                             <label class="file-upload-box">
                                 <input type="file" id="imageInput" multiple accept="image/*">
                                 <i class='bx bx-cloud-upload' style="font-size: 2.5rem;"></i>
@@ -69,7 +88,7 @@
                             <div id="imagePreviewContainer" class="preview-grid"></div>
                         </div>
 
-                        <button type="submit" id="submitMenuBtn" class="btn-primary full-btn">
+                        <button type="submit" id="submitMenuBtn" class="full-btn">
                             <i class='bx bx-save'></i> SAVE TO DATABASE
                         </button>
                     </form>
