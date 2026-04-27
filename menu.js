@@ -47,13 +47,37 @@ async function loadCategories() {
     } catch(err) { console.error("Gagal muat kategori:", err); }
 }
 
+// --- FUNGSI LOAD DATA MENU ---
 async function fetchMenus() {
+    const grid = document.getElementById('menu-grid');
+    const pagination = document.getElementById('pagination');
+
+    // 1. Tampilkan Spinner Loading sebelum mengambil data
+    if(grid) {
+        grid.innerHTML = `
+            <div class="menu-loading-container">
+                <i class='bx bx-loader-circle bx-spin'></i>
+                <h3>Sedang Meracik Menu...</h3>
+            </div>
+        `;
+    }
+    // Sembunyikan pagination sementara saat loading
+    if(pagination) pagination.innerHTML = '';
+
+    // 2. Mulai ambil data dari API
     try {
         const res = await fetch(`${API_URL}/menus?search=${currentSearch}&category=${currentCategory}&page=${currentPage}&limit=6`);
         const data = await res.json();
+        
+        // 3. Render data jika berhasil
         renderGrid(data.menus);
         renderPagination(data.totalPages);
-    } catch(err) { console.error("Gagal muat menu:", err); }
+    } catch(err) { 
+        console.error("Gagal muat menu:", err); 
+        if(grid) {
+            grid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1; font-weight:bold; font-size:1.2rem; color:#FF4757;">Oops, Gagal memuat menu. Pastikan koneksimu stabil!</p>';
+        }
+    }
 }
 
 function renderGrid(menus) {
