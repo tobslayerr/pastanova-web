@@ -13,6 +13,30 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        /* Gaya khusus untuk List Add-ons di Halaman Detail */
+        .addons-section { margin: 2rem 0; }
+        .addons-section h3 { font-family: 'Anton', sans-serif; font-size: 1.4rem; color: var(--bg-dark-brown); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px;}
+        .addons-grid-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .addon-card-item { 
+            background: #fff; border: 2px solid #F0F0F0; border-radius: 15px; padding: 12px;
+            display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .addon-card-item:hover { border-color: var(--primary-pink); }
+        .addon-card-item img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; }
+        .addon-card-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary-pink); pointer-events: none; /* Pointer event dimatikan agar klik di div yang bekerja */ }
+        .addon-info-mini b { font-size: 0.95rem; color: var(--bg-dark-brown); display: block; line-height: 1.2; }
+        .addon-info-mini span { font-size: 0.85rem; color: var(--primary-orange); font-weight: 800; }
+        
+        /* State Aktif saat Addon Dicentang */
+        .addon-card-item.selected { border-color: var(--primary-pink); background: #FFF4F7; }
+
+        @media (max-width: 600px) {
+            .addons-grid-detail { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -28,8 +52,7 @@
             <div class="detail-grid-premium">
                 <div class="detail-gallery-showcase">
                     <div class="detail-carousel" id="productCarousel">
-                        <div class="carousel-inner" id="detailImagesInner">
-                            </div>
+                        <div class="carousel-inner" id="detailImagesInner"></div>
                         <button class="c-prev" onclick="moveSlideDetail(-1)"><i class='bx bx-chevron-left'></i></button>
                         <button class="c-next" onclick="moveSlideDetail(1)"><i class='bx bx-chevron-right'></i></button>
                     </div>
@@ -50,6 +73,12 @@
                     <div class="detail-description-box">
                         <h3><i class='bx bx-restaurant'></i> Deskripsi Menu</h3>
                         <p id="detailDesc">Mohon tunggu sebentar, sedang mengambil data produk...</p>
+                    </div>
+
+                    <div class="addons-section" id="addonsSection" style="display: none;">
+                        <h3><i class='bx bx-plus-circle'></i> Pilih Tambahan (Optional)</h3>
+                        <div id="addonsListContainer" class="addons-grid-detail">
+                            </div>
                     </div>
 
                     <div class="detail-divider"></div>
@@ -108,63 +137,155 @@
     <script src="/menu.js"></script>
     
     <script>
-        // Logika Eksekusi Halaman Detail
         let detailQty = 1;
         let detailItem = null;
+        let selectedAddons = []; // Menyimpan state addon yang dicentang
 
         document.addEventListener('DOMContentLoaded', async () => {
             const id = new URLSearchParams(window.location.search).get('id');
             if(!id) return window.location.href = '/menu/';
 
             try {
-                // Pastikan backend kamu menyala (npm run dev)
-                const res = await fetch(`/api/menus`);
+                // Gunakan URL API dinamis (dari menu.js jika ada, atau fallback ke '/api/menus')
+                const apiUrl = typeof API_URL !== 'undefined' ? `${API_URL}/menus` : '/api/menus';
+                const res = await fetch(apiUrl);
                 const data = await res.json();
+                
+                // Cari produk yang sesuai dengan ID
                 detailItem = data.menus.find(m => m._id === id);
 
                 if(detailItem) {
                     document.getElementById('detailName').innerText = detailItem.name;
-                    document.getElementById('detailPrice').innerText = `Rp ${detailItem.price.toLocaleString('id-ID')}`;
                     document.getElementById('detailDesc').innerText = detailItem.description;
                     document.getElementById('detailCategory').innerText = detailItem.category;
                     
                     // Inject gambar ke carousel
-                    document.getElementById('detailImagesInner').innerHTML = detailItem.images.map(img => `<img src="${img}" alt="${detailItem.name}">`).join('');
+                    if(detailItem.images && detailItem.images.length > 0) {
+                        document.getElementById('detailImagesInner').innerHTML = detailItem.images.map(img => `<img src="${img}" alt="${detailItem.name}">`).join('');
+                    }
+
+                    // Render Addons
+                    const addonsSection = document.getElementById('addonsSection');
+                    const addonContainer = document.getElementById('addonsListContainer');
+                    
+                    if(detailItem.addons && detailItem.addons.length > 0) {
+                        addonsSection.style.display = 'block'; // Tampilkan blok addon
+                        addonContainer.innerHTML = detailItem.addons.map(a => `
+                            <div class="addon-card-item" id="addon-card-${a._id}" onclick="toggleAddonSelection('${a._id}', '${a.name}', ${a.price})">
+                                <input type="checkbox" id="chk-${a._id}">
+                                <img src="${a.image}" alt="${a.name}">
+                                <div class="addon-info-mini">
+                                    <b>${a.name}</b>
+                                    <span>+ Rp ${a.price.toLocaleString('id-ID')}</span>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        addonsSection.style.display = 'none'; // Sembunyikan jika tidak ada addon
+                    }
+
+                    // Update tampilan harga awal
+                    updateTotalPriceDisplay();
                 }
-            } catch(e) { console.error("Gagal mengambil data produk", e); }
+            } catch(e) { 
+                console.error("Gagal mengambil data produk", e); 
+                document.getElementById('detailName').innerText = "Gagal Memuat Produk";
+            }
         });
 
+        // Logika Carousel Foto
         function moveSlideDetail(dir) {
             const track = document.getElementById('detailImagesInner');
             track.scrollBy({ left: track.clientWidth * dir, behavior: 'smooth' });
         }
 
+        // Logika Seleksi Addon
+        function toggleAddonSelection(id, name, price) {
+            const chk = document.getElementById(`chk-${id}`);
+            const card = document.getElementById(`addon-card-${id}`);
+            
+            // Balikkan state checkbox
+            chk.checked = !chk.checked;
+            
+            if(chk.checked) {
+                selectedAddons.push({ id, name, price });
+                card.classList.add('selected'); // Efek UI aktif
+            } else {
+                selectedAddons = selectedAddons.filter(a => a.id !== id);
+                card.classList.remove('selected'); // Hapus efek UI aktif
+            }
+            
+            // Kalkulasi ulang harga saat addon berubah
+            updateTotalPriceDisplay();
+        }
+
+        // Kalkulator Harga Real-time (Menu + Addons) * Qty
+        function updateTotalPriceDisplay() {
+            if(!detailItem) return;
+            let addonsTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+            let finalPrice = (detailItem.price + addonsTotal) * detailQty;
+            document.getElementById('detailPrice').innerText = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+        }
+
+        // Ubah Qty
         function changeDetailQty(delta) {
             detailQty += delta;
             if(detailQty < 1) detailQty = 1;
             document.getElementById('detailQtyVal').innerText = detailQty;
+            updateTotalPriceDisplay(); // Harga harus terupdate saat jumlah item berubah
         }
 
+        // Modifikasi Add to Cart untuk menyertakan Add-ons
         function handleAddToCart() {
             if(!detailItem) return;
-            addToCart(detailItem._id, detailItem.name, detailItem.price, detailItem.images[0], detailQty);
-            detailQty = 1; // Reset ke 1
+            
+            // Hitung harga gabungan (Item + Addons)
+            let addonsTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+            let finalPrice = detailItem.price + addonsTotal;
+            let finalName = detailItem.name;
+            
+            // Gabungkan nama Addon agar tampil rapi di keranjang
+            if(selectedAddons.length > 0) {
+                let addonNames = selectedAddons.map(a => a.name).join(', ');
+                finalName += ` (+ ${addonNames})`;
+            }
+            
+            addToCart(detailItem._id, finalName, finalPrice, detailItem.images[0], detailQty);
+            
+            // Reset state
+            detailQty = 1; 
             document.getElementById('detailQtyVal').innerText = detailQty;
-            toggleCart(); // Tampilkan keranjang dari samping
+            selectedAddons = [];
+            document.querySelectorAll('.addon-card-item').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('input[type="checkbox"]').checked = false;
+            });
+            updateTotalPriceDisplay();
+            
+            toggleCart(); // Buka sidebar keranjang
         }
 
+        // Modifikasi Buy Now WA untuk format Addons
         function handleBuyNow() {
             if(!detailItem) return;
-            const total = detailItem.price * detailQty;
             
-            let text = `Halo *PastaNova!*`;
-            text += `Saya ingin memesan menu berikut:`;
-            text += `*Pesanan Langsung:`;
-            text += `${detailQty}x *${detailItem.name}`;
-            text += `   ↳ Rp ${total.toLocaleString('id-ID')}`;
+            let addonsTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+            const total = (detailItem.price + addonsTotal) * detailQty;
+            
+            // Format List Addons jika ada
+            let addonsText = selectedAddons.length > 0 
+                ? `%0A   ➕ *Add-ons:* ${selectedAddons.map(a => a.name).join(', ')}` 
+                : '';
+
+            let text = `Halo *PastaNova!* 👋%0A`;
+            text += `Saya ingin memesan:%0A%0A`;
+            text += `━━━━━━━━━━━━━━━━━━━━━%0A`;
+            text += `🛒 *Pesanan:*%0A`;
+            text += `▪️ ${detailQty}x *${detailItem.name}*${addonsText}%0A`;
+            text += `   ↳ Rp ${total.toLocaleString('id-ID')}%0A`;
             text += `━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
-            text += `*Total Pembayaran:* *Rp ${total.toLocaleString('id-ID')}`;
-            text += `Mohon informasi ketersediaannya ya. Terima kasih!`;
+            text += `💰 *Total Pembayaran:* *Rp ${total.toLocaleString('id-ID')}*%0A%0A`;
+            text += `Mohon info ketersediaannya ya! 🙏`;
             
             window.open(`https://wa.me/6281287990438?text=${text}`, '_blank');
         }
