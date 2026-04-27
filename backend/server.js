@@ -91,6 +91,7 @@ app.post('/api/admin/login', loginLimiter, (req, res) => {
     }
 });
 
+// --- API ADDONS ---
 app.get('/api/addons', async (req, res) => {
     const addons = await Addon.find().sort({ name: 1 });
     res.json(addons);
@@ -100,6 +101,7 @@ app.post('/api/addons', authenticateToken, upload.single('image'), async (req, r
     try {
         const newAddon = new Addon({
             name: req.body.name,
+            description: req.body.description, // Menerima input deskripsi
             price: req.body.price,
             image: req.file.path
         });
@@ -159,6 +161,27 @@ app.post('/api/menus', authenticateToken, upload.array('images', 5), async (req,
         });
         await newMenu.save();
         res.status(201).json(newMenu);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// === API BARU: UPDATE MENU (EDIT) ===
+app.put('/api/menus/:id', authenticateToken, upload.array('images', 5), async (req, res) => {
+    try {
+        const existingImages = req.body.existingImages ? JSON.parse(req.body.existingImages) : [];
+        const newImages = req.files ? req.files.map(file => file.path) : [];
+        const combinedImages = [...existingImages, ...newImages]; // Gabungkan foto lama dan baru
+        const addonIds = req.body.addons ? JSON.parse(req.body.addons) : [];
+
+        const updatedMenu = await Menu.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+            addons: addonIds,
+            images: combinedImages
+        }, { new: true });
+        
+        res.json(updatedMenu);
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
