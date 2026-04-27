@@ -4,28 +4,47 @@
 .admin-header h2 { font-size: 4.5rem; color: var(--primary-pink); text-shadow: 2px 2px 0 rgba(0,0,0,0.02); font-family: 'Anton', sans-serif; line-height: 1; }
 .admin-header p { font-weight: 700; color: #888; margin-top: 10px; }
 
+/* Grid Dasar */
 .admin-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem; margin-top: 3rem; }
+.left-column { display: flex; flex-direction: column; gap: 2rem; }
 
 .admin-card { background: #fff; padding: 2.5rem; border-radius: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.05); }
 .admin-card h3 { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--bg-dark-brown); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
 
-/* Kategori List */
-.mini-form { display: flex; gap: 10px; margin-bottom: 2rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 2rem; }
+
+/* Forms & Lists Kiri (Kategori & Addons) */
+.mini-form { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .mini-form input { flex: 1; padding: 12px; border: 2px solid #F0F0F0; border-radius: 12px; font-weight: 600; }
+.mini-form-column { display: flex; flex-direction: column; gap: 10px; }
+.mini-form-column input { padding: 10px; border: 2px solid #F0F0F0; border-radius: 10px; font-weight: 600; }
+
 .btn-icon { background: var(--primary-pink); color: #fff; border: none; padding: 0 15px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+.btn-save-addon { background: var(--primary-pink); color: #fff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-save-addon:hover { background: var(--bg-dark-brown); }
+.btn-delete-small { background: #FFE5E5; color: #FF4757; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+.btn-delete-small:hover { background: #FF4757; color: white; }
+
 .admin-list { list-style: none; }
 .admin-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F5F5F5; font-weight: 700; color: #444; }
-.admin-list button { background: #FFE5E5; color: #FF4757; border: none; padding: 5px 8px; border-radius: 8px; cursor: pointer; }
 
-/* Menu Form */
+/* Menu Form Utama */
 #menuForm { display: flex; flex-direction: column; gap: 1.2rem; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group label { font-weight: 800; font-size: 0.9rem; color: #555; }
-.form-group input, .form-group textarea, .form-group select { 
-    padding: 12px; border: 2px solid #F5F5F5; border-radius: 12px; background: #FAFAFA; font-family: 'Nunito', sans-serif; font-weight: 600;
+.form-group input:not([type="checkbox"]):not([type="file"]), .form-group textarea, .form-group select { 
+    padding: 12px; border: 2px solid #F5F5F5; border-radius: 12px; background: #FAFAFA; font-family: 'Nunito', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box;
 }
-.form-group input:focus { border-color: var(--primary-pink); outline: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary-pink); outline: none; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* Addon Selection Checkboxes */
+.addon-selection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
+.addon-check-item { display: flex; align-items: center; gap: 10px; background: #FAFAFA; padding: 12px; border-radius: 10px; border: 1px solid #EEE; cursor: pointer; transition: 0.2s; }
+.addon-check-item:hover { border-color: var(--primary-pink); background: #FFF4F7; }
+.addon-check-item span { font-weight: 700; font-size: 0.9rem; color: var(--bg-dark-brown); }
+.addon-check-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary-pink); cursor: pointer; }
 
 /* File Upload & Preview Drag Drop */
 .file-upload-box { 
@@ -56,7 +75,7 @@
     background: var(--primary-pink); color: #fff; border: none; 
     padding: 1.2rem; border-radius: 15px; font-weight: 800; font-size: 1.1rem; 
     cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(200, 16, 78, 0.2);
-    display: flex; justify-content: center; align-items: center; gap: 8px;
+    display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px;
 }
 .full-btn:hover:not(:disabled) { background: var(--bg-dark-brown); transform: translateY(-3px); }
 .full-btn:disabled { background: #CCC; cursor: not-allowed; box-shadow: none; transform: none; }
@@ -71,4 +90,5 @@
 @media (max-width: 968px) {
     .admin-main { margin-left: 0; padding-top: 7rem; }
     .admin-grid { grid-template-columns: 1fr; }
+    .addon-selection-grid { grid-template-columns: 1fr; }
 }
