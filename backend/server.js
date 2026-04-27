@@ -5,6 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const Addon = require('./models/Addon');
 
 // Keamanan
 const jwt = require('jsonwebtoken');
@@ -90,6 +91,28 @@ app.post('/api/admin/login', loginLimiter, (req, res) => {
     }
 });
 
+app.get('/api/addons', async (req, res) => {
+    const addons = await Addon.find().sort({ name: 1 });
+    res.json(addons);
+});
+
+app.post('/api/addons', authenticateToken, upload.single('image'), async (req, res) => {
+    try {
+        const newAddon = new Addon({
+            name: req.body.name,
+            price: req.body.price,
+            image: req.file.path
+        });
+        await newAddon.save();
+        res.status(201).json(newAddon);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/addons/:id', authenticateToken, async (req, res) => {
+    await Addon.findByIdAndDelete(req.params.id);
+    res.json({ message: "Addon dihapus" });
+});
+
 // --- API KATEGORI ---
 app.get('/api/categories', async (req, res) => {
     const cats = await Category.find();
@@ -111,7 +134,13 @@ app.get('/api/menus', async (req, res) => {
         if (search) query.name = { $regex: search, $options: 'i' };
         if (category && category !== 'semua') query.category = category;
 
-        const menus = await Menu.find(query).limit(limit * 1).skip((page - 1) * limit).sort({ createdAt: -1 });
+        // .populate('addons') SANGAT PENTING
+        const menus = await Menu.find(query)
+            .populate('addons')
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .sort({ createdAt: -1 });
+            
         const count = await Menu.countDocuments(query);
         res.json({ menus, totalPages: Math.ceil(count / limit), currentPage: Number(page) });
     } catch (err) { res.status(500).json({ error: err.message }); }
@@ -120,7 +149,14 @@ app.get('/api/menus', async (req, res) => {
 app.post('/api/menus', authenticateToken, upload.array('images', 5), async (req, res) => {
     try {
         const imageUrls = req.files.map(file => file.path);
-        const newMenu = new Menu({ ...req.body, images: imageUrls });
+        // Addons dikirim dalam bentuk string JSON array, perlu diparsing
+        const addonIds = req.body.addons ? JSON.parse(req.body.addons) : [];
+        
+        const newMenu = new Menu({ 
+            ...req.body, 
+            images: imageUrls,
+            addons: addonIds 
+        });
         await newMenu.save();
         res.status(201).json(newMenu);
     } catch (err) { res.status(500).json({ error: err.message }); }
