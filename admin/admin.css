@@ -3,12 +3,14 @@
 
 .admin-header h2 { font-size: 4.5rem; color: var(--primary-pink); text-shadow: 2px 2px 0 rgba(0,0,0,0.02); font-family: 'Anton', sans-serif; line-height: 1; }
 .admin-header p { font-weight: 700; color: #888; margin-top: 10px; }
+.btn-logout { background:#FFE5E5; color:#FF4757; border:none; padding:12px 25px; border-radius:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; transition: 0.3s; }
+.btn-logout:hover { background:#FF4757; color:#fff; }
 
 /* Grid Dasar */
 .admin-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem; margin-top: 3rem; }
 .left-column { display: flex; flex-direction: column; gap: 2rem; }
 
-.admin-card { background: #fff; padding: 2.5rem; border-radius: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.05); }
+.admin-card { background: #fff; padding: 2.5rem; border-radius: 24px; box-shadow: 0 15px 45px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
 .admin-card h3 { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--bg-dark-brown); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
 
 .mt-2 { margin-top: 1rem; }
@@ -16,27 +18,33 @@
 
 /* Forms & Lists Kiri (Kategori & Addons) */
 .mini-form { display: flex; gap: 10px; margin-bottom: 1.5rem; }
-.mini-form input { flex: 1; padding: 12px; border: 2px solid #F0F0F0; border-radius: 12px; font-weight: 600; }
+.mini-form input { flex: 1; padding: 12px; border: 2px solid #F0F0F0; border-radius: 12px; font-weight: 600; font-family: 'Nunito', sans-serif; }
 .mini-form-column { display: flex; flex-direction: column; gap: 10px; }
-.mini-form-column input { padding: 10px; border: 2px solid #F0F0F0; border-radius: 10px; font-weight: 600; }
+.mini-form-column input { padding: 12px; border: 2px solid #F0F0F0; border-radius: 10px; font-weight: 600; font-family: 'Nunito', sans-serif; }
+.mini-form-column input:focus, .mini-form input:focus { border-color: var(--primary-pink); outline: none; }
 
 .btn-icon { background: var(--primary-pink); color: #fff; border: none; padding: 0 15px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
-.btn-save-addon { background: var(--primary-pink); color: #fff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-.btn-save-addon:hover { background: var(--bg-dark-brown); }
-.btn-delete-small { background: #FFE5E5; color: #FF4757; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
-.btn-delete-small:hover { background: #FF4757; color: white; }
+.btn-icon:hover { background: var(--bg-dark-brown); }
+.btn-save-addon { background: var(--primary-pink); color: #fff; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 800; transition: 0.3s; font-family: 'Nunito', sans-serif; }
+.btn-save-addon:hover:not(:disabled) { background: var(--bg-dark-brown); }
+.btn-save-addon:disabled { background: #CCC; cursor: not-allowed; }
 
-.admin-list { list-style: none; }
-.admin-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F5F5F5; font-weight: 700; color: #444; }
+.btn-delete-small { background: #FFE5E5; color: #FF4757; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
+.btn-delete-small:hover { background: #FF4757; color: white; transform: scale(1.05); }
+
+/* Stylish List Container */
+.admin-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.admin-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-radius: 12px; background: #FAFAFA; border: 1px solid #EEE; transition: 0.2s; }
+.admin-list li:hover { border-color: var(--primary-pink); background: #FFF4F7; }
 
 /* Menu Form Utama */
 #menuForm { display: flex; flex-direction: column; gap: 1.2rem; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group label { font-weight: 800; font-size: 0.9rem; color: #555; }
 .form-group input:not([type="checkbox"]):not([type="file"]), .form-group textarea, .form-group select { 
-    padding: 12px; border: 2px solid #F5F5F5; border-radius: 12px; background: #FAFAFA; font-family: 'Nunito', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box;
+    padding: 14px; border: 2px solid #F0F0F0; border-radius: 12px; background: #FAFAFA; font-family: 'Nunito', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; transition: 0.3s;
 }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary-pink); outline: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary-pink); outline: none; background: #fff; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
 /* Addon Selection Checkboxes */
@@ -49,8 +57,7 @@
 /* File Upload & Preview Drag Drop */
 .file-upload-box { 
     border: 2px dashed #DDD; padding: 25px; text-align: center; border-radius: 15px; 
-    cursor: pointer; color: #888; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px;
-    background: #FAFAFA;
+    cursor: pointer; color: #888; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; background: #FAFAFA;
 }
 .file-upload-box:hover { border-color: var(--primary-pink); background: rgba(200, 16, 78, 0.03); }
 .file-upload-box input { display: none; }
@@ -66,29 +73,39 @@
 .preview-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .btn-remove-preview { 
     position: absolute; top: 3px; right: 3px; background: rgba(255, 71, 87, 0.9); 
-    color: white; border: none; border-radius: 50%; width: 22px; height: 22px; 
-    font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: white; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s;
 }
+.btn-remove-preview:hover { background: #FF4757; transform: scale(1.1); }
 
-/* Tombol Submit */
+/* Tombol Submit & Cancel */
 .full-btn { 
     background: var(--primary-pink); color: #fff; border: none; 
     padding: 1.2rem; border-radius: 15px; font-weight: 800; font-size: 1.1rem; 
-    cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(200, 16, 78, 0.2);
-    display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px;
+    cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(200, 16, 78, 0.15); display: flex; justify-content: center; align-items: center; gap: 8px; font-family: 'Nunito', sans-serif;
 }
 .full-btn:hover:not(:disabled) { background: var(--bg-dark-brown); transform: translateY(-3px); }
 .full-btn:disabled { background: #CCC; cursor: not-allowed; box-shadow: none; transform: none; }
 
-/* Table */
-.admin-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-.admin-table th { background: #FFF4F7; color: var(--primary-pink); font-size: 1rem; text-transform: uppercase; padding: 15px; text-align: left;}
-.admin-table td { font-size: 1rem; color: #444; border-bottom: 1px solid #F0F0F0; padding: 15px;}
-.btn-delete { background: #FF4757; color: #fff; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: 800; transition: 0.3s; }
-.btn-delete:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3); }
+.btn-cancel { background: #EEE; color: #555; box-shadow: none; }
+.btn-cancel:hover { background: #DDD !important; color: #333; }
+
+/* Table Inventory */
+.admin-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 1rem; }
+.admin-table th { background: #FFF4F7; color: var(--primary-pink); font-size: 0.95rem; text-transform: uppercase; padding: 15px; text-align: left; letter-spacing: 0.5px;}
+.admin-table th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+.admin-table th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+.admin-table td { font-size: 0.95rem; color: #444; border-bottom: 1px solid #F0F0F0; padding: 15px; vertical-align: middle; transition: 0.2s; }
+.admin-table tr:hover td { background-color: #FAFAFA; }
+
+/* Tombol Action Table */
+.btn-edit { background: var(--bg-yellow); color: var(--bg-dark-brown); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; transition: 0.3s; font-family: 'Nunito', sans-serif; }
+.btn-edit:hover { background: #dceb4d; transform: scale(1.05); }
+.btn-delete { background: #FF4757; color: #fff; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; transition: 0.3s; font-family: 'Nunito', sans-serif; }
+.btn-delete:hover { transform: scale(1.05); box-shadow: 0 5px 10px rgba(255, 71, 87, 0.2); }
 
 @media (max-width: 968px) {
     .admin-main { margin-left: 0; padding-top: 7rem; }
     .admin-grid { grid-template-columns: 1fr; }
     .addon-selection-grid { grid-template-columns: 1fr; }
+    .table-responsive { overflow-x: auto; }
 }
