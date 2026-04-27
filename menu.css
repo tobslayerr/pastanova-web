@@ -7,6 +7,37 @@
 .menu-header h2 { font-size: 5rem; color: var(--primary-pink); line-height: 1; text-transform: uppercase; font-family: 'Anton', sans-serif;}
 .menu-subtitle { color: #888; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; }
 
+.menu-loading-container {
+    grid-column: 1 / -1; /* Membuatnya membentang penuh di tengah grid */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.menu-loading-container i {
+    font-size: 5rem;
+    color: var(--primary-pink);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 10px 15px rgba(200, 16, 78, 0.2));
+}
+
+.menu-loading-container h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    color: var(--bg-dark-brown);
+    letter-spacing: 1px;
+    animation: pulse-text 1.5s infinite;
+}
+
+@keyframes pulse-text {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 /* Filter & Pencarian */
 .menu-controls { display: flex; flex-direction: column; align-items: center; gap: 2rem; width: 100%; max-width: 850px; margin: 3rem auto 0; }
 .search-wrapper { position: relative; width: 100%; }
