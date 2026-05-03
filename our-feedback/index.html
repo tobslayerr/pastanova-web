@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/footer.css">
     <link rel="stylesheet" href="/feedback.css">
     
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -24,98 +24,96 @@
     </div>
 
     <div id="navbar-placeholder"></div>
-
+    
     <main>
-        <section class="feedback-hero">
-            <div class="container">
-                <div class="feedback-hero-content reveal from-bottom">
-                    <h1>WHAT THEY <span class="text-orange">SAY</span></h1>
-                    <p>Cerita dan ulasan pelanggan setia yang telah merasakan kenikmatan sejati dari PastaNova.</p>
+        <section class="feedback-section">
+            <div class="container" style="flex-direction: column; gap: 2rem;">
+                
+                <div class="section-header reveal from-bottom">
+                    <h2>WORD ON THE STREET IS WHEAT</h2>
+                </div>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card reveal from-bottom">
+                        <i class='bx bxs-quote-alt-left quote-icon'></i>
+                        <div class="stars">
+                            <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                        </div>
+                        <p>"The carbonara is simply divine creamy, rich, and so satisfying!"</p>
+                        <div class="customer-name">NOAH P</div>
+                    </div>
+
+                    <div class="testimonial-card reveal from-bottom delay-1">
+                        <i class='bx bxs-quote-alt-left quote-icon'></i>
+                        <div class="stars">
+                            <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                        </div>
+                        <p>"Authentic sauces that taste like they came straight from Italy. Love it!"</p>
+                        <div class="customer-name">IVY G</div>
+                    </div>
+
+                    <div class="testimonial-card reveal from-bottom delay-2">
+                        <i class='bx bxs-quote-alt-left quote-icon'></i>
+                        <div class="stars">
+                            <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                        </div>
+                        <p>"Best pasta in town. The aglio e olio has the perfect spicy kick."</p>
+                        <div class="customer-name">TARA L</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="reviews" class="feedback-section">
-            <div class="container">
-                <div class="review-grid">
-                    
-                    <div class="review-card reveal from-left">
-                        <div class="review-header">
-                            <div class="user-info">
-                                <div class="avatar"><i class='bx bx-user'></i></div>
-                                <div>
-                                    <h4>@foodiejakarta</h4>
-                                    <div class="stars">
-                                        <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class='bx bxl-instagram instagram-icon'></i>
+        <section class="rating-section">
+            <div class="container rating-container">
+                <div class="rating-image-wrapper reveal from-left">
+                    <img src="/src/rating-pasta.jpg" alt="Delicious Pasta at Pastanova">
+                </div>
+                <div class="rating-text-wrapper reveal from-right delay-1">
+                    <h2>A PERFECT<br>5-STAR RATING</h2>
+                    <div class="rating-box">
+                        <div class="stars">
+                            <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
                         </div>
-                        <div class="review-body">
-                            <p>"Jujur ini Spaghetti Bolognese paling comfort food banget! Saus dagingnya royal, pastanya al dente. Bakal repeat order sih ini! 🔥🍝"</p>
-                        </div>
-                        <img src="/src/rating-pasta.jpg" alt="Review Image" class="review-image">
+                        <p>The only pasta spot in the Jakarta area with a consistent 5-star rating for quality and taste.</p>
                     </div>
-
-                    <div class="review-card reveal from-bottom delay-1">
-                        <div class="review-header">
-                            <div class="user-info">
-                                <div class="avatar bg-pink"><i class='bx bx-user'></i></div>
-                                <div>
-                                    <h4>@pasta_lover99</h4>
-                                    <div class="stars">
-                                        <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class='bx bxl-instagram instagram-icon'></i>
-                        </div>
-                        <div class="review-body">
-                            <p>"Mushroom sauce-nya the best! Creamy-nya pas nggak bikin eneg sama sekali. Packagingnya juga aman sampai rumah. Luv it! ❤️"</p>
-                        </div>
-                        <img src="/src/authentic-sauces.jpg" alt="Review Image" class="review-image">
-                    </div>
-
-                    <div class="review-card reveal from-right delay-2">
-                        <div class="review-header">
-                            <div class="user-info">
-                                <div class="avatar bg-yellow"><i class='bx bx-user'></i></div>
-                                <div>
-                                    <h4>@jkt.eats</h4>
-                                    <div class="stars">
-                                        <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class='bx bxl-instagram instagram-icon'></i>
-                        </div>
-                        <div class="review-body">
-                            <p>"Carbonara paling mantap di Pasar Minggu! Rasanya authentic, gurih kejunya kerasa banget. Wajib coba yang extra cheese! 🧀✨"</p>
-                        </div>
-                        <img src="/src/authentic-recipes.jpg" alt="Review Image" class="review-image">
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <section class="cta-review-section">
-            <div class="container cta-container reveal from-bottom">
-                <div class="cta-content">
-                    <h2>BAGAIMANA PENGALAMANMU?</h2>
-                    <p>Kami sangat menghargai setiap masukan darimu. Bagikan momen menikmati PastaNova di Instagram dan tag kami!</p>
-                    <a href="https://instagram.com/pastanova.corner" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block;">
-                        <i class='bx bxl-instagram'></i> Tag @PASTANOVA.CORNER
-                    </a>
+        <section class="why-section">
+            <div class="container" style="flex-direction: column; gap: 1rem;">
+                <div class="section-header reveal from-bottom">
+                    <h2>WHY OUR PASTA HITS DIFFERENT?</h2>
+                </div>
+                
+                <div class="why-grid">
+                    <div class="why-item reveal from-bottom">
+                        <div class="why-img-wrapper">
+                            <img src="/src/authentic-recipes.jpg" alt="Authentic Recipes Ingredients">
+                        </div>
+                        <h4>AUTHENTIC RECIPES</h4>
+                    </div>
+                    <div class="why-item reveal from-bottom delay-1">
+                        <div class="why-img-wrapper">
+                            <img src="/src/fresh-ingredients.jpg" alt="Fresh Tomato and Basil">
+                        </div>
+                        <h4>FRESH INGREDIENTS</h4>
+                    </div>
+                    <div class="why-item reveal from-bottom delay-2">
+                        <div class="why-img-wrapper">
+                            <img src="/src/authentic-sauces.jpg" alt="Four Authentic Pasta Sauces">
+                        </div>
+                        <h4>AUTHENTIC SAUCES</h4>
+                    </div>
                 </div>
             </div>
         </section>
 
         <div id="footer-placeholder"></div>
+        
     </main>
 
     <script src="/script.js"></script>
-
 </body>
 </html>
