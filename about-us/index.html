@@ -26,25 +26,32 @@
     <div id="navbar-placeholder"></div>
 
     <main>
-        <section id="story" class="story-section">
-            <div class="container story-container">
+        <section id="about" class="about-section">
+            <div class="container about-container">
+                <div class="about-logo reveal from-left floating delay-1">
+                    <div class="logo-backdrop"></div>
+                    <img src="/src/logo.png" alt="Logo Pastanova">
+                </div>
                 
-                <div class="story-text reveal from-right">
-                    <h2>OUR STORY</h2>
+                <div class="about-text reveal from-right">
+                    <h2>ABOUT US</h2>
                     <div class="text-card">
                         <p style="text-align: justify;">
-                            Dimulai dari satu resep rumahan khas Italia, Pastanova hadir untuk menyajikan kenikmatan dalam pasta. Fokus kami sederhana, yaitu menggunakan bahan-bahan segar seperti tomat matang, daun basil pilihan, dan saus krim berkualitas tinggi.
+                            Pastanova menyajikan pasta lezat yang dibuat dari bahan-bahan segar seperti tomat matang, daun basil, dan saus krim yang kaya rasa. Terinspirasi dari resep rumahan khas Italia, setiap hidangan dibuat dengan penuh cinta untuk menghadirkan kenyamanan di setiap suapan.
                         </p>
-                        <p style="text-align: justify;">
-                            Setiap hidangan dibuat dengan teliti untuk memastikan tekstur yang sempurna dan cita rasa autentik di setiap suapan. Bagi kami, pasta bukan sekadar makanan, melainkan pengalaman makan yang memuaskan.
-                        </p>
-                    </div>
-                </div>
+                        
+                        <div id="more-text" style="display: none;">
+                            <p style="text-align: justify;">
+                                Kami memilih bahan berkualitas untuk memastikan cita rasa yang autentik, tekstur yang sempurna, dan pengalaman makan yang memuaskan. Tujuan kami adalah mengubah hidangan sederhana menjadi momen yang istimewa, baik saat anda menikmati makan siang yang hangat, makan malam bersama keluarga, maupun berbagi kebahagiaan dengan teman.
+                            </p>
+                            <p style="text-align: justify;">
+                                Di Pastanova, setiap hidangan dibuat dengan hangat dan sepenuh hati, untuk menghadirkan cita rasa comfort food yang sesungguhnya.
+                            </p>
+                        </div>
 
-                <div class="story-image-wrapper reveal from-left delay-1 floating">
-                    <div class="blob-backdrop"></div>
-                    <div class="story-image">
-                        <img src="/src/pasta.jpg" alt="Fresh Raw Pasta Ingredients">
+                        <button id="read-more-btn" class="btn-read-more">
+                            Baca Selengkapnya <i class='bx bx-chevron-down'></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -114,6 +121,24 @@
     </main>
 
     <script src="/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const readMoreBtn = document.getElementById('read-more-btn');
+            if(readMoreBtn) {
+                readMoreBtn.addEventListener('click', function() {
+                    const moreText = document.getElementById('more-text');
+                    if (moreText.style.display === 'none') {
+                        moreText.style.display = 'block';
+                        this.innerHTML = "Tampilkan Lebih Sedikit <i class='bx bx-chevron-up'></i>";
+                    } else {
+                        moreText.style.display = 'none';
+                        this.innerHTML = "Baca Selengkapnya <i class='bx bx-chevron-down'></i>";
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
