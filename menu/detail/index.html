@@ -21,17 +21,34 @@
         .addons-grid-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .addon-card-item { 
             background: #fff; border: 2px solid #F0F0F0; border-radius: 15px; padding: 12px;
-            display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: flex-start; /* Ubah ke flex-start agar rapi saat teks panjang */
+            gap: 12px; cursor: pointer; transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .addon-card-item:hover { border-color: var(--primary-pink); }
-        .addon-card-item img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; }
-        .addon-card-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary-pink); pointer-events: none; /* Pointer event dimatikan agar klik di div yang bekerja */ }
-        .addon-info-mini b { font-size: 0.95rem; color: var(--bg-dark-brown); display: block; line-height: 1.2; }
-        .addon-info-mini span { font-size: 0.85rem; color: var(--primary-orange); font-weight: 800; }
+        .addon-card-item img { width: 45px; height: 45px; border-radius: 10px; object-fit: cover; margin-top: 2px; }
+        .addon-card-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary-pink); pointer-events: none; margin-top: 5px; }
+        
+        .addon-info-mini { flex: 1; }
+        .addon-info-mini b { font-size: 0.95rem; color: var(--bg-dark-brown); display: block; line-height: 1.2; margin-bottom: 4px; }
+        
+        /* DITAMBAHKAN TEXT-ALIGN JUSTIFY UNTUK DESKRIPSI ADDON */
+        .addon-info-mini small { 
+            font-size: 0.85rem; 
+            color: #888; 
+            display: block; 
+            line-height: 1.4; 
+            margin-bottom: 6px; 
+            text-align: justify; 
+        }
+        
+        .addon-info-mini span { font-size: 0.85rem; color: var(--primary-orange); font-weight: 800; display: block; }
         
         /* State Aktif saat Addon Dicentang */
         .addon-card-item.selected { border-color: var(--primary-pink); background: #FFF4F7; }
+
+        /* DITAMBAHKAN TEXT-ALIGN JUSTIFY UNTUK DESKRIPSI MENU */
+        #detailDesc { text-align: justify; }
 
         @media (max-width: 600px) {
             .addons-grid-detail { grid-template-columns: 1fr; }
@@ -176,7 +193,7 @@
                                 <img src="${a.image}" alt="${a.name}">
                                 <div class="addon-info-mini">
                                     <b>${a.name}</b>
-                                    <small style="color:#888; display:block; line-height:1.2; margin-bottom:4px;">${a.description || ''}</small>
+                                    <small>${a.description || ''}</small>
                                     <span>+ Rp ${a.price.toLocaleString('id-ID')}</span>
                                 </div>
                             </div>
